@@ -1,0 +1,20 @@
+<table>
+<thead>
+<tr>
+<th><%= @user.email %>さんの投稿一覧</th>
+</tr>
+</thead>
+<tbody>
+  <% @tasks.each do |task| %>
+<tr>
+<td><%= link_to task.title, task_path(task) %></td>
+  <% if user_signed_in? && task.user_id == current_user.id %>
+<td><%= link_to '編集', edit_task_path(task) %></td>
+<td><%= link_to '削除', task_path(task), method: :delete %></td>
+  <% else %>
+<td></td><td></td>
+</tr>
+  <% end %>
+  <% end %>
+</tbody>
+</table>

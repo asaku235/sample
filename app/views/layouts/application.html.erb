@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <nav>
+    <div class="nav-wrapper">
+      <a href="" class="brand-logo right">はてなブログ</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><%= link_to '新着一覧', '/' %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to 'マイページ', "/users/#{current_user.id}" %></li>
+          <li><%= link_to '投稿する', new_task_path %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+          <li><%= link_to 'ログイン', new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+    </nav>
+    <!-- ▼ 追加 -->
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <!-- ▲ 追加 -->
+    <%= yield %>
+  </body>
+</html>
